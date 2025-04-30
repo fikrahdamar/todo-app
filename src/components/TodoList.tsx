@@ -1,7 +1,11 @@
 import React from "react";
 import { TodoItemProps } from "../types/todo";
 
-export const TodoList: React.FC<TodoItemProps> = ({ list, onChecked }) => {
+export const TodoList: React.FC<TodoItemProps> = ({
+  list,
+  onChecked,
+  onDeleteItem,
+}) => {
   return (
     <>
       <div>
@@ -17,7 +21,9 @@ export const TodoList: React.FC<TodoItemProps> = ({ list, onChecked }) => {
                 {listItem.name}
               </span>
               <span> {listItem.deadline}</span>
-              <button>&times;</button>
+              <button onClick={() => onDeleteItem?.(listItem.id)}>
+                &times;
+              </button>
             </li>
           ))}
         </ul>
