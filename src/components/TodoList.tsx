@@ -5,6 +5,7 @@ export const TodoList: React.FC<TodoItemProps> = ({
   list,
   onChecked,
   onDeleteItem,
+  onClearItem,
 }) => {
   return (
     <>
@@ -27,6 +28,9 @@ export const TodoList: React.FC<TodoItemProps> = ({
             </li>
           ))}
         </ul>
+      </div>
+      <div>
+        <button onClick={onClearItem}>Clear item</button>
       </div>
     </>
   );

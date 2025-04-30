@@ -42,6 +42,9 @@ function App() {
     };
     setItem([...item, newTodo]);
   }
+  function handleClearItem() {
+    setItem([]);
+  }
   return (
     <>
       <div className="h-screen flex justify-center items-center bg-gray-200">
@@ -52,6 +55,7 @@ function App() {
             list={item}
             onChecked={setIsChecked}
             onDeleteItem={handleDeleteItem}
+            onClearItem={handleClearItem}
           />
         </div>
       </div>

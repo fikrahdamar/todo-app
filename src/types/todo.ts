@@ -9,6 +9,7 @@ export interface TodoItemProps {
   list: TodoItem[];
   onChecked?: (id: number) => void;
   onDeleteItem?: (id: number) => void;
+  onClearItem?: () => void;
 }
 
 export type NewTodoItem = Omit<TodoItem, "id" | "checked">;
