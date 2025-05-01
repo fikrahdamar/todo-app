@@ -47,16 +47,22 @@ function App() {
   }
   return (
     <>
-      <div className="h-screen flex justify-center items-center bg-gray-200">
-        <div className="flex flex-col items-center  bg-neutral-400 shadow-2xl h-96 w-3/5">
-          <Header />
-          <Form onAddItem={handleAddItem} />
-          <TodoList
-            list={item}
-            onChecked={setIsChecked}
-            onDeleteItem={handleDeleteItem}
-            onClearItem={handleClearItem}
-          />
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center bg-neutral-200 shadow-2xl h-min-96 w-4/5 rounded-3xl">
+          <div className="bg-stone-800 font-bold font-sans text-amber-100  w-full text-center rounded-t-3xl shadow-2xl">
+            <Header />
+          </div>
+          <div>
+            <Form onAddItem={handleAddItem} />
+          </div>
+          <div>
+            <TodoList
+              list={item}
+              onChecked={setIsChecked}
+              onDeleteItem={handleDeleteItem}
+              onClearItem={handleClearItem}
+            />
+          </div>
         </div>
       </div>
     </>

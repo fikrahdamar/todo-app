@@ -9,28 +9,44 @@ export const TodoList: React.FC<TodoItemProps> = ({
 }) => {
   return (
     <>
-      <div>
-        <ul>
+      <div className="my-5">
+        <ul className="font-sans text-md uppercase font-medium">
           {list.map((listItem) => (
-            <li key={listItem.id}>
+            <li
+              key={listItem.id}
+              className="flex items-center gap-2 py-2 border-b"
+            >
               <input
                 type="checkbox"
                 checked={listItem.checked}
                 onChange={() => onChecked?.(listItem.id)}
+                className="form-checkbox h-6 w-6  border-gray-300 rounded-md  "
               />
-              <span className={listItem.checked ? "line-through" : ""}>
+              <span
+                className={` ml-2 flex-1 ${
+                  listItem.checked ? "line-through" : ""
+                }`}
+              >
                 {listItem.name}
               </span>
-              <span> {listItem.deadline}</span>
-              <button onClick={() => onDeleteItem?.(listItem.id)}>
+              <span className="mx-3 w-32 text-right"> {listItem.deadline}</span>
+              <button
+                onClick={() => onDeleteItem?.(listItem.id)}
+                className="bg-stone-700 p-[3px] rounded-full px-[9px] font-black  ml-3 text-amber-100"
+              >
                 &times;
               </button>
             </li>
           ))}
         </ul>
       </div>
-      <div>
-        <button onClick={onClearItem}>Clear item</button>
+      <div className="items-center flex flex-col my-6">
+        <button
+          onClick={onClearItem}
+          className="font-sans font-medium uppercase bg-amber-100 px-2 py-1 rounded-2xl hover:shadow-xl hover:translate-y-0 hover:translate-x-0 transition-all duration-200 ease-in-out"
+        >
+          Clear item
+        </button>
       </div>
     </>
   );
