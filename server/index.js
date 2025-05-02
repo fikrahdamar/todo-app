@@ -20,3 +20,12 @@ async function connectDB() {
 }
 
 connectDB();
+
+//route
+const todoRoute = require("./routes/todoRoutes");
+app.use("/api/todos", todoRoute);
+
+//jalankan server
+app.listen(5000, () => {
+  console.log("Server jalan di http://localhost:5000");
+});
