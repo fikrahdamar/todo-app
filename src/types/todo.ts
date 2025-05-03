@@ -1,5 +1,5 @@
 export interface TodoItem {
-  id: number;
+  _id: string;
   name: string;
   checked: boolean;
   deadline?: string;
@@ -7,8 +7,8 @@ export interface TodoItem {
 
 export interface TodoItemProps {
   list: TodoItem[];
-  onChecked?: (id: number) => void;
-  onDeleteItem?: (id: number) => void;
+  onChecked?: (id: string) => void;
+  onDeleteItem?: (id: string) => void;
   onClearItem?: () => void;
 }
 

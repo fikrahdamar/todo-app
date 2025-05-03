@@ -1,43 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import { TodoList } from "./components/TodoList";
 import { NewTodoItem, TodoItem } from "./types/todo";
 
-const list: TodoItem[] = [
-  { id: 1, name: "Ngerjain pemweb", checked: true, deadline: "25 september" },
-  {
-    id: 2,
-    name: "kpp",
-    checked: false,
-    deadline: "20 september",
-  },
-  {
-    id: 3,
-    name: "oop",
-    checked: false,
-    deadline: "25 september",
-  },
-];
-
 function App() {
-  const [item, setItem] = useState(list);
+  const [item, setItem] = useState<TodoItem[]>([]);
 
-  function setIsChecked(id: number) {
-    setItem(
-      item.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    );
-  }
-  function handleDeleteItem(id: number) {
-    setItem(item.filter((item) => item.id !== id));
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/todos");
+        const fetchData = await res.json();
+
+        setItem(fetchData);
+      } catch (error) {
+        console.log("error fetch data", error);
+      }
+    };
+
+    fetchTodos();
+  }, []);
+
+  const setIsChecked = async (id: string) => {
+    const target = item.find((it) => it._id === id);
+    if (!target) return;
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/todos/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ checked: !target.checked }),
+      });
+      const updated = await res.json();
+      setItem(item.map((it) => (it._id === id ? updated : it)));
+    } catch (error) {
+      console.log("tidak menemukan data untuk dicentang", error);
+    }
+  };
+
+  function handleDeleteItem(id: string) {
+    setItem(item.filter((item) => item._id !== id));
   }
   function handleAddItem(newItem: NewTodoItem) {
     const newTodo: TodoItem = {
       ...newItem,
-      id: Date.now(),
+      _id: "test",
       checked: false,
     };
     setItem([...item, newTodo]);

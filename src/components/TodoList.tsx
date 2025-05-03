@@ -13,13 +13,13 @@ export const TodoList: React.FC<TodoItemProps> = ({
         <ul className="font-sans text-md uppercase font-medium">
           {list.map((listItem) => (
             <li
-              key={listItem.id}
+              key={listItem._id}
               className="flex items-center gap-2 py-2 border-b"
             >
               <input
                 type="checkbox"
                 checked={listItem.checked}
-                onChange={() => onChecked?.(listItem.id)}
+                onChange={() => onChecked?.(listItem._id)}
                 className="form-checkbox h-6 w-6  border-gray-300 rounded-md  "
               />
               <span
@@ -31,7 +31,7 @@ export const TodoList: React.FC<TodoItemProps> = ({
               </span>
               <span className="mx-3 w-32 text-right"> {listItem.deadline}</span>
               <button
-                onClick={() => onDeleteItem?.(listItem.id)}
+                onClick={() => onDeleteItem?.(listItem._id)}
                 className="bg-stone-700 p-[3px] rounded-full px-[9px] font-black  ml-3 text-amber-100"
               >
                 &times;
