@@ -55,6 +55,23 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    const deletedAll = await Todo.deleteMany({});
+    res
+      .status(200)
+      .json({
+        message: "berhasil dihapus semua",
+        deletedCount: deletedAll.deletedCount,
+      });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi kesalahan saat hapus semua data",
+      error: error.message,
+    });
+  }
+});
+
 router.patch("/:id", async (req, res) => {
   const { checked } = req.body;
 
