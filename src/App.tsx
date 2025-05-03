@@ -66,9 +66,16 @@ function App() {
     }
   };
 
-  function handleClearItem() {
-    setItem([]);
-  }
+  const handleClearItem = async () => {
+    try {
+      await fetch("http://localhost:5000/api/todos", {
+        method: "DELETE",
+      });
+      setItem([]);
+    } catch (error) {
+      console.log("error hapus semua data", error);
+    }
+  };
   return (
     <>
       <div className="flex justify-center items-center h-screen">
