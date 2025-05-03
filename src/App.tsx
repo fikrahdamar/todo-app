@@ -40,17 +40,32 @@ function App() {
     }
   };
 
-  function handleDeleteItem(id: string) {
-    setItem(item.filter((item) => item._id !== id));
-  }
-  function handleAddItem(newItem: NewTodoItem) {
-    const newTodo: TodoItem = {
-      ...newItem,
-      _id: "test",
-      checked: false,
-    };
-    setItem([...item, newTodo]);
-  }
+  const handleDeleteItem = async (id: string) => {
+    try {
+      await fetch(`http://localhost:5000/api/todos/${id}`, {
+        method: "DELETE",
+      });
+      setItem(item.filter((it) => it._id !== id));
+    } catch (error) {
+      console.log("error hapus data", error);
+    }
+  };
+
+  const handleAddItem = async (newItem: NewTodoItem) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/todos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newItem),
+      });
+
+      const newData = await res.json();
+      setItem([...item, newData]);
+    } catch (error) {
+      console.log("error tambah data", error);
+    }
+  };
+
   function handleClearItem() {
     setItem([]);
   }

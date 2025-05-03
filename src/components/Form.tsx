@@ -5,14 +5,16 @@ const Form = ({ onAddItem }: FormProps) => {
   const [name, setNames] = useState("");
   const [deadline, setDeadline] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!name || !deadline) return;
 
     const newItem = {
       name,
       deadline,
     };
-    if (!name || !deadline) return;
+
     onAddItem(newItem);
     setNames("");
     setDeadline("");

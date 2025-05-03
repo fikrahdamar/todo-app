@@ -12,7 +12,7 @@ export interface TodoItemProps {
   onClearItem?: () => void;
 }
 
-export type NewTodoItem = Omit<TodoItem, "id" | "checked">;
+export type NewTodoItem = Omit<TodoItem, "_id" | "checked">;
 
 export interface FormProps {
   onAddItem: (item: NewTodoItem) => void;
