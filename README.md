@@ -34,12 +34,13 @@ Install this on your computer :
 	git clone https://github.com/fikrahdamar/todo-app.git
 ```
 
-install project front-end dependencies menggunakan npm:
+install project front-end dependencies with npm:
 `$ npm install`
 
-install project back-end dependencies menggunakan npm:
-`$ npm install` atau
-`$ npm install express mongoose cors` (jika ada kendala)
+install project back-end dependencies with npm:
+`$ npm install` Or if you encounter any issues, try installing specific dependencies manually:
+`$ npm install express mongoose cors`
 
-Tinggal jalankan server backend lalu jalankan front-end dengan
+#### Running the Project
+
 `$ npm run dev`
